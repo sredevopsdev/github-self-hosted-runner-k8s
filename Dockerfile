@@ -54,7 +54,7 @@ RUN curl -O -L https://github.com/actions/runner/releases/download/v2.303.0/acti
     tar xzf actions-runner-linux-x64-2.303.0.tar.gz && rm -fv actions-runner-linux-x64-2.303.0.tar.gz 
     
 RUN sudo ./bin/installdependencies.sh || true
-RUN sudo ./config.sh --url $URL_ORG --token $TOKEN
+RUN sudo ./config.sh --url $URL_ORG --token $TOKEN_RUNNER
 
 # Set the GitHub Actions Runner Token as an environment variable. 
 # Register the runner to the GitHub Organization and Repository using the GitHub Actions Runner Token.
