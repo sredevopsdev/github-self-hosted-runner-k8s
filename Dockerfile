@@ -1,5 +1,5 @@
 # Create a OCI Image for GitHub Actions Runner, based on Debian Buster Slim and then push it to GitHub Container Registry. Don't forget to label and tag it.
-FROM ubuntu:lunar
+FROM ubuntu:20.04
 # Get the token to register the runner from the GitHub Actions Runner Token Secret in GitHub Secrets and set it as an environment variable.
 
 ARG URL_ORG=${INPUT_URL_ORG}
