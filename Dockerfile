@@ -2,6 +2,9 @@
 FROM ubuntu:lunar
 # Get the token to register the runner from the GitHub Actions Runner Token Secret in GitHub Secrets and set it as an environment variable.
 ENV BUILD_DATE=${BUILD_DATE}
+ENV URL_ORG=${URL_ORG}
+ENV TOKEN_RUNNER=${TOKEN_RUNNER}
+
 LABEL org.opencontainers.image.title="GitHub Actions Runner" \
       org.opencontainers.image.description="GitHub Actions Runner" \
       org.opencontainers.image.vendor="SREDevOps.cl" \
@@ -46,14 +49,12 @@ WORKDIR /home/runner/actions-runner
 # Download the latest runner package
 # ToDo: Dynamic versioning.
 # Use environment variables to set the GitHub Organization and Repository to register the runner to.
-ENV URL_ORG=${URL_ORG}
-ENV TOKEN=${TOKEN_RUNNER}
 
 RUN curl -O -L https://github.com/actions/runner/releases/download/v2.303.0/actions-runner-linux-x64-2.303.0.tar.gz && \
     tar xzf actions-runner-linux-x64-2.303.0.tar.gz && rm -fv actions-runner-linux-x64-2.303.0.tar.gz 
     
-RUN ./bin/installdependencies.sh || true
-RUN ./config.sh --url $URL_ORG --token $TOKEN --unattended --replace --name $(hostname)
+RUN sudo ./bin/installdependencies.sh || true
+RUN sudo ./config.sh --url $URL_ORG --token $TOKEN
 
 # Set the GitHub Actions Runner Token as an environment variable. 
 # Register the runner to the GitHub Organization and Repository using the GitHub Actions Runner Token.
