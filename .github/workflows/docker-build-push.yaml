@@ -49,10 +49,10 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           build-args: |
-            BUILD_DATE=${{ github.event.head_commit.timestamp }}
-            VCS_REF=${{ github.sha }}
-            URL_ORG=${{ github.repository_owner }}
-            TOKEN_RUNNER=${{ secrets.TOKEN_RUNNER }}
+            --build-arg BUILD_DATE=${{ github.event.head_commit.timestamp }}
+            --build-arg VCS_REF=${{ github.sha }}
+            --build-arg URL_ORG=${{ github.repository_owner }}
+            --build-arg TOKEN_RUNNER=${{ secrets.TOKEN_RUNNER }}
           context: .
           platforms: linux/amd64
           push: true
